@@ -9,17 +9,17 @@ from datetime import datetime
 
 ##PARAMETERS##
 ##SOURCE OF TRP FILES (FROM HDD)(use '/' or '\\')##
-####srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01\\System1\\Raw_Data'
+srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01\\System1\\Raw_Data'
 ##DESTINATION OF DUMP (use '/' or '\\')##
-####dstRoot = 'C:\\Users\\Nathan\\Desktop\\DumpPy'
+dstRoot = 'C:\\Users\\Nathan\\Desktop\\Dump'
 ##################################################
 date = datetime.today().strftime('%Y-%m-%d')
 
 ##TESTS##
-date = '2019-06-05'
-root = 'C:\\Users\\Nathan\\Desktop\\fileSamplerPG'
-srcRoot = os.path.join(root,'sample_root')
-dstRoot = os.path.join(root,'destination_root')
+##date = '2019-06-05'
+##root = 'C:\\Users\\Nathan\\Desktop\\fileSamplerPG'
+##srcRoot = os.path.join(root,'sample_root')
+##dstRoot = os.path.join(root,'destination_root')
 ##################################################
 
 
@@ -61,5 +61,5 @@ if(not os.path.exists(dstRoot)):
 
 for src in trpBundle:
     print(os.path.split(src)[1],'copied to',dstRoot)
-##    shutil.copy(src,dstRoot)
-input('')       
+    shutil.copy(src,dstRoot)
+   
