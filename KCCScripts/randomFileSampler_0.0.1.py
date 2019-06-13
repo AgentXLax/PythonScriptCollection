@@ -1,3 +1,6 @@
+##Author: Nathan Wisla
+##Last Updated: 6/09/2019
+
 import os
 import shutil
 from random import choice
