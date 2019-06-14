@@ -48,7 +48,7 @@ for folder in os.listdir(srcRoot):
                 trpBundle.append(randomFile)
                 i += 1
             #closes loop if a folder happens to have less than 3 .trp files    
-            if(len(trpList)<3):
+            if(len(trpList) <= 3):
                 i += 1
 
 
