@@ -34,7 +34,7 @@ for folder in os.listdir(srcRoot):
     try:
         hourRoot = os.path.join(srcRoot,folder,'success',date)
         for hour in os.listdir(hourRoot):
-            trpList = []
+            trpList = [
             trpPath = os.path.join(hourRoot,hour)
             for file in os.listdir(trpPath):
                 #Directory to pull the .trp files from
