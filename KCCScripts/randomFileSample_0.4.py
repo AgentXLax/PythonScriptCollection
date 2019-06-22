@@ -6,7 +6,6 @@ import shutil
 from random import choice
 from datetime import datetime
 
-
 ##PARAMETERS##
 ##SOURCE OF TRP FILES (FROM HDD)(use '/' or '\\')##
 srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01\\System1\\Raw_Data'
@@ -14,16 +13,13 @@ srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01
 dstRoot = 'D:\\Dump'
 ##################################################
 date = datetime.today().strftime('%Y-%m-%d')
-
+##################################################
 ##TESTS##
 ##date = '2019-06-05'
 ##root = 'C:\\Users\\Nathan\\Desktop\\fileSamplerPG'
 ##srcRoot = os.path.join(root,'sample_root')
 ##dstRoot = os.path.join(root,'destination_root')
 ##################################################
-
-
-
 
 ##################################CODE###############################
 trpBundle = []
@@ -56,9 +52,6 @@ for folder in os.listdir(srcRoot):
 
     except(FileNotFoundError):
         continue
-
-##trpBundle now has the paths to all .trp files in the source folder.
-##copy them over to the destination
             
 ##check if the directory exists
 if(not os.path.exists(dstRoot)):
@@ -69,7 +62,9 @@ elif(len(os.listdir(dstRoot)) != 0):
     for file in os.listdir(dstRoot):
         print('removing',file)
         os.remove(os.path.join(dstRoot,file))
-
+##trpBundle now has the paths to all .trp files in the source folder.
+##the destination directory exists and the folder is empty
+##copy the source folders over to the destination
 for src in trpBundle:
     print(os.path.split(src)[1],'copied to',dstRoot)
     shutil.copy(src,dstRoot)
