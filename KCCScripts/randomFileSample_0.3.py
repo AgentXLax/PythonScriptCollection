@@ -11,7 +11,7 @@ from datetime import datetime
 ##SOURCE OF TRP FILES (FROM HDD)(use '/' or '\\')##
 srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01\\System1\\Raw_Data'
 ##DESTINATION OF DUMP (use '/' or '\\')##
-dstRoot = 'D:\\Dump'#'C:\\Users\\Nathan\\Desktop\\DumpPy'
+dstRoot = 'D:\\Dump
 ##################################################
 date = datetime.today().strftime('%Y-%m-%d')
 
