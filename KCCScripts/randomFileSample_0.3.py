@@ -6,7 +6,6 @@ import shutil
 from random import choice
 from datetime import datetime
 
-
 ##PARAMETERS##
 ##SOURCE OF TRP FILES (FROM HDD)(use '/' or '\\')##
 srcRoot =  'D:\\23610009_CUS_Rogers_Network_Optimization_Program\\CA_Campaign_01\\System1\\Raw_Data'
@@ -21,9 +20,6 @@ date = datetime.today().strftime('%Y-%m-%d')
 ##srcRoot = os.path.join(root,'sample_root')
 ##dstRoot = os.path.join(root,'destination_root')
 ##################################################
-
-
-
 
 ##################################CODE###############################
 trpBundle = []
@@ -52,22 +48,14 @@ for folder in os.listdir(srcRoot):
                 #closes loop if a folder happens to have less than 3 .trp files    
                 if(len(trpList) <= 3):
                     i += 1
-
     except(FileNotFoundError):
         continue
 
-
 ##trpBundle now has the paths to all .trp files in the source folder.
-##copy them over to the destination
-            
-
+##copy them over to the destination           
 if(not os.path.exists(dstRoot)):
     os.mkdir(dstRoot)
 
 for src in trpBundle:
     print(os.path.split(src)[1],'copied to',dstRoot)
     shutil.copy(src,dstRoot)
-     
-
-
-
