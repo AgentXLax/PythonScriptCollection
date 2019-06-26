@@ -1,5 +1,5 @@
 ##Author: Nathan Wisla
-##Last Updated: 6/22/2019
+##Last Updated: 6/26/2019
 
 import os
 import shutil
@@ -60,8 +60,14 @@ if(not os.path.exists(dstRoot)):
 ##remove files from the destination if it isn't empty
 elif(len(os.listdir(dstRoot)) != 0):
     for file in os.listdir(dstRoot):
-        print('removing',file)
-        os.remove(os.path.join(dstRoot,file))
+        dst = os.path.join(dstRoot,file)
+        if os.path.isdir(dst):
+            print('removing directory',file)
+            shutil.rmtree(dst)
+        else:
+            print('removing file',file)
+            os.remove(dst)
+    
 ##trpBundle now has the paths to all .trp files in the source folder.
 ##the destination directory exists and the folder is empty
 ##copy the source folders over to the destination
