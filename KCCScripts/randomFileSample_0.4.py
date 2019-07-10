@@ -1,5 +1,5 @@
 ##Author: Nathan Wisla
-##Last Updated: 6/26/2019
+##Last Updated: 7/10/2019
 
 import os
 import shutil
@@ -25,6 +25,7 @@ date = datetime.today().strftime('%Y-%m-%d')
 trpBundle = []
 ##navigate to the root of the trp files
 ##first to the root for each client's data
+print('Finding .trp files...')
 for folder in os.listdir(srcRoot):
     #in case the specific date directory doesn't exist, keep checking other directories
     #it is a FileNotFoundError, but I just made a sweeping catch-all
@@ -42,18 +43,26 @@ for folder in os.listdir(srcRoot):
         #files at random to be pulled later
             i = 0        
             while(i < 3):
-                randomFile = os.path.join(trpPath,choice(trpList))
-                if(randomFile not in trpBundle):
-                    trpBundle.append(randomFile)
-                    i += 1
-                #closes loop if a folder happens to have less than 3 .trp files    
-                if(len(trpList) <= 3):
-                    i += 1
+                try:                    
+                    randomFile = os.path.join(trpPath,choice(trpList))
+                    if(randomFile not in trpBundle):
+                        trpBundle.append(randomFile)
+                        print('identifying random file',randomFile,\
+                              'from folder',trpPath)
+                        i += 1
+                    #closes loop if a folder happens to have less than 3 .trp files    
+                    if(len(trpList) <= 3):
+                        i += 1
+                except(IndexError):
+                    break
 
     except(FileNotFoundError):
         continue
+print('.trp compile complete!')
+    
             
 ##check if the directory exists
+print('Dumping .trp files to folder',dstRoot)
 if(not os.path.exists(dstRoot)):
     print('creating destination folder at',dstRoot)
     os.mkdir(dstRoot)
