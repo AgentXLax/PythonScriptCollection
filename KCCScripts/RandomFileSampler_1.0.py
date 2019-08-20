@@ -1,5 +1,5 @@
 ##Author: Nathan Wisla
-##Last Updated: 8/18/2019
+##Last Updated: 8/19/2019
 
 import os
 import shutil
@@ -23,16 +23,19 @@ class FileSampler:
         '''
         srcRoot = self.srcRoot
         startDate = (endDate - datetime.timedelta(1))
-        hours = os.listdir(os.path.join(srcRoot,'client11_Rogers','success',startDate.strftime('%Y-%m-%d')))
         startTime = -1
         endTime = -1
-        
-        for i in range(len(hours)):
-            if len(hours) == 1:
-                startTime = hours[0]
-            if float(hours[i])-float(hours[i-1]) > 1:
-                startTime = hours[i]
-                break
+        try:
+            hours = os.listdir(os.path.join(srcRoot,'client11_Rogers','success',startDate.strftime('%Y-%m-%d')))
+            for i in range(len(hours)):
+                if len(hours) == 1:
+                    startTime = hours[0]
+                if float(hours[i])-float(hours[i-1]) > 1:
+                    startTime = hours[i]
+                    break
+        except(FileNotFoundError):
+            print('folder',startDate,'does not exist!\
+                    Workday starts on',endDate)
         hours = os.listdir(os.path.join(srcRoot,'client11_Rogers','success',endDate.strftime('%Y-%m-%d')))
         if startTime == -1:
             startDate = endDate
@@ -41,6 +44,8 @@ class FileSampler:
         startDateTime = datetime.datetime(startDate.year,startDate.month,startDate.day,int(startTime[:-3]))
         endDateTime = datetime.datetime(endDate.year,endDate.month,endDate.day,int(endTime[:-3]))
         return startDateTime,endDateTime
+    
+        return endDateTime,endDateTime
      
     def trpWalk(self):
         startTime = self.startDateTime.strftime('%H.00')
@@ -97,8 +102,8 @@ class FileSampler:
                 break #in case of an empty list, choice() will fail
 
     def createDst(self):
-        print('creating destination folder at',dstRoot)
-        os.mkdir(dstRoot)
+        print('creating destination folder at',self.dstRoot)
+        os.mkdir(self.dstRoot)
         print('Dump folder successfully created!')
 
     def clearDst(self):
@@ -118,7 +123,7 @@ class FileSampler:
         elif len(os.listdir(self.dstRoot)) != 0:
             self.clearDst()
         for src in self.trpCollection:
-            print(os.path.split(src)[1],'copied to',self.dstRoot)
+            print('copying',os.path.split(src)[1],'to',self.dstRoot)
             shutil.copy(src,self.dstRoot)
         print('Files successfully copied!')
 
