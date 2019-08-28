@@ -9,7 +9,7 @@ import datetime
 class FileSampler:
 
     def __init__(self,srcRoot,dstRoot,date=datetime.date.today(),\
-                 startEndOverride=False,startDTOR=None,endDTOR=None, backup=True):
+                 startEndOverride=False,startDTOR=None,endDTOR=None, backup=False):
         '''
            srcRoot: root of the source where you want to take files from
            dstRoot: root of the desired dump location
@@ -75,23 +75,25 @@ class FileSampler:
             startTime = 0
 
         for root, dirs, files in os.walk(srcRoot):
-            if endDate in dirs:
-                dirs.clear()
-                if startDate != endDate:
-                    dirs.append(startDate)
-                dirs.append(endDate)
-            if len(dirs) > 0 and dirs[0].endswith('.00'):
-                    while startDate in root and int(dirs[0][:-3]) < startTime:
-                        print(dirs)
-                        dirs.pop(0)
+            if len(dirs) > 0:
+                if len(dirs[0]) == len(endDate) and '-' in dirs[0]:
+                    dirs.clear()
+                    if startDate != endDate:
+                        dirs.append(startDate)
+                    dirs.append(endDate)
+                if dirs[0].endswith('.00'):
+                        while startDate in root and int(dirs[0][:-3]) < startTime:
+                            print(dirs)
+                            dirs.pop(0)
                     
             aList = []
             for name in files:
                 if not name.endswith('.trp'):               
                     aList.append(name)
-                while len(aList)>0:
-                    files.remove(aList[0])
-                    aList.pop(0)
+            while len(aList)>0:
+                files.remove(aList[0])
+                aList.pop(0)
+                
             self.trpTripleRandomize(root,files,trpCollection)   
         return trpCollection
      
@@ -102,7 +104,7 @@ class FileSampler:
                 randomFile = os.path.join(src,choice(srcFiles))
                 if randomFile not in collector:
                     collector.append(randomFile)
-                    #print(randomFile)
+                    print(randomFile)
                     i += 1
                 if len(srcFiles) < 3:
                     i += 1
