@@ -1,4 +1,4 @@
-from RandomFileSampler1_0 import FileSampler
+from RandomFileSampler import FileSampler
 import datetime
 
 srcRoot = 'C:\\Users\\Nathan\\Desktop\\fileSamplerPG\\sample_root'
